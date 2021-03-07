@@ -1,5 +1,8 @@
 def minus(operands):
-    pass
+    print("{op1} - {op2} = {res}".format(
+        op1=operands[0],
+        op2=operands[1],
+        res=operands[0] - operands[1]))
 
 
 if __name__ == '__main__':
