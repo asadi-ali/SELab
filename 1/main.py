@@ -1,3 +1,7 @@
+def plus(operands):
+    pass
+
+
 def minus(operands):
     print("{op1} - {op2} = {res}".format(
         op1=operands[0],
@@ -14,5 +18,7 @@ if __name__ == '__main__':
         operands = input("Input two operands: ")
         operands = list(map(int, operands.split(' ')))
 
-        if command == '-':
+        if command == '+':
+            plus(operands)
+        elif command == '-':
             minus(operands)
