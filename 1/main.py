@@ -19,6 +19,13 @@ def div(operands):
         res=operands[0] / operands[1]))
 
 
+def mult(operands):
+    print("{op1} * {op2} = {res}".format(
+        op1=operands[0],
+        op2=operands[1],
+        res=operands[0] * operands[1]))
+
+
 if __name__ == '__main__':
     while True:
         command = input("Input operator: ")
@@ -34,3 +41,5 @@ if __name__ == '__main__':
             minus(operands)
         elif command == '/':
             div(operands)
+        elif command == '*':
+            mult(operands)
