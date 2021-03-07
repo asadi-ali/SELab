@@ -1,5 +1,8 @@
 def plus(operands):
-    pass
+    print("{op1} + {op2} = {res}".format(
+        op1=operands[0],
+        op2=operands[1],
+        res=operands[0] + operands[1]))
 
 
 def minus(operands):
