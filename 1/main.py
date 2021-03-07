@@ -12,6 +12,10 @@ def minus(operands):
         res=operands[0] - operands[1]))
 
 
+def div(operands):
+    pass
+
+
 if __name__ == '__main__':
     while True:
         command = input("Input operator: ")
@@ -25,3 +29,5 @@ if __name__ == '__main__':
             plus(operands)
         elif command == '-':
             minus(operands)
+        elif command == '/':
+            div(operands)
