@@ -9,13 +9,13 @@ class Rectangle(Shape):
     def compute_area(self) -> int:
         return self.height * self.width
 
-    def set_height(self, new_height) -> None:
+    def set_height(self, new_height: int) -> None:
         self.height = new_height
 
     def get_height(self) -> int:
         return self.height
 
-    def set_width(self, new_width) -> None:
+    def set_width(self, new_width: int) -> None:
         self.width = new_width
 
     def get_width(self) -> int:
