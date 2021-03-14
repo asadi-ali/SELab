@@ -6,10 +6,10 @@ class Square(Shape):
         self.length: int = length
 
     def compute_area(self) -> int:
-        pass
+        return self.length * self.length
 
     def set_length(self, length: int) -> None:
-        pass
+        self.length = length
 
     def get_length(self) -> int:
-        pass
+        return self.length
