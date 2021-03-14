@@ -12,3 +12,8 @@ class RectangleUnitTest(unittest.TestCase):
         rectangle: Rectangle = Rectangle(height=3, width=2)
         rectangle.set_height(5)
         self.assertEqual(rectangle.get_height(), 5)
+
+    def test_rectangle_set_width(self):
+        rectangle: Rectangle = Rectangle(height=3, width=2)
+        rectangle.set_width(1)
+        self.assertEqual(rectangle.get_width(), 1)
