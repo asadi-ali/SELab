@@ -7,4 +7,4 @@ class Rectangle(Shape):
         self.width: int = width
 
     def compute_area(self) -> int:
-        pass
+        return self.height * self.width
