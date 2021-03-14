@@ -1,6 +1,7 @@
 import unittest
 
 from .rectangle import Rectangle
+from .square import Square
 
 
 class RectangleUnitTest(unittest.TestCase):
