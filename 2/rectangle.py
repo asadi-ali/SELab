@@ -16,7 +16,7 @@ class Rectangle(Shape):
         return self.height
 
     def set_width(self, new_width) -> None:
-        pass
+        self.width = new_width
 
     def get_width(self) -> int:
-        pass
+        return self.width
