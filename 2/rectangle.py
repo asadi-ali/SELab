@@ -14,3 +14,9 @@ class Rectangle(Shape):
 
     def get_height(self) -> int:
         return self.height
+
+    def set_width(self, new_width) -> None:
+        pass
+
+    def get_width(self) -> int:
+        pass
