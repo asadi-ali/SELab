@@ -1,5 +1,7 @@
 import unittest
 
+from .rectangle import Rectangle
+
 
 class RectangleUnitTest(unittest.TestCase):
     def test_rectangle_area(self):
