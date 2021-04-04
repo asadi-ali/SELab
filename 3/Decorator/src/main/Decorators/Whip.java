@@ -11,11 +11,11 @@ public class Whip extends Decorator {
 
     @Override
     public String getDescription() {
-        return null;
+        return super.getDescription() + " with whip";
     }
 
     @Override
     public double cost() {
-        return 0;
+        return super.cost() + 0.10;
     }
 }

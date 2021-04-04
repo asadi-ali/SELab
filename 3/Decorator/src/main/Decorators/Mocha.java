@@ -11,11 +11,11 @@ public class Mocha extends Decorator {
 
     @Override
     public String getDescription() {
-        return null;
+        return super.getDescription() + " with mocha";
     }
 
     @Override
     public double cost() {
-        return 0;
+        return super.cost() + 0.2;
     }
 }

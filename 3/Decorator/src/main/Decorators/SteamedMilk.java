@@ -11,11 +11,11 @@ public class SteamedMilk extends Decorator {
 
     @Override
     public String getDescription() {
-        return null;
+        return super.getDescription() + " with milk";
     }
 
     @Override
     public double cost() {
-        return 0;
+        return super.cost() + 0.1;
     }
 }

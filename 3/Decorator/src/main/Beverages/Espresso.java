@@ -9,11 +9,11 @@ public class Espresso implements Beverage {
 
     @Override
     public String getDescription() {
-        return null;
+        return "Delicious Espresso";
     }
 
     @Override
     public double cost() {
-        return 0;
+        return 1.99;
     }
 }
