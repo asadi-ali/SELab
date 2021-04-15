@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 import jwt
 
-from .db import run_migrations, close_connection, query_db
+from db import run_migrations, close_connection, query_db
 
 app = Flask(__name__)
 jwt_secret_key = 'random secret'
@@ -70,3 +70,7 @@ def get_username():
         return jsonify({"error": "Authorization header is not valid."}), 401
 
     return jsonify({'username': data['username']}), 200
+
+
+if __name__ == '__main__':
+    app.run(port=5001)
