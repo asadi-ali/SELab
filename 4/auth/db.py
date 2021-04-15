@@ -25,6 +25,7 @@ def run_migrations():
         password text not null
     );
     """)
+    db.commit()
 
 
 def close_connection():
@@ -33,8 +34,8 @@ def close_connection():
         db.close()
 
 
-def query_db(query, one=False):
-    cur = get_db().execute(query)
+def query_db(query, args=(), one=False):
+    cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
