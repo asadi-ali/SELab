@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 
-from .db import run_migrations, close_connection, get_db
+from .db import run_migrations, close_connection, query_db
 
 app = Flask(__name__)
 
@@ -24,11 +24,9 @@ def sign_up():
     # TODO: Validate this values
 
     # TODO: send request to profile
-    db = get_db()
-    with db:
-        db.execute("""
+    query_db("""
             insert into auth_user(username, password)
             values (?, ?);
-        """, (username, password))
+        """, args=(username, password), with_commit=True)
 
     return jsonify({}), 201
