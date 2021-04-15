@@ -22,9 +22,9 @@ def show_profile():
         if info:
             return jsonify(info), 200
         else:
-            return 'Bad request.', 400
+            return jsonify({'error': 'Bad request.'}), 400
     else:
-        return 'Please login first.', 401
+        return ({'error': 'Please login first.'}), 401
 
 
 @app.route('/user/edit-profile', methods=['POST'])
@@ -40,9 +40,9 @@ def edit_profile():
             query_db('update profile set email=?, phone=? where username=?', [email, phone, username], with_commit=True)
             return jsonify({}), 200
         else:
-            return 'Bad request.', 400
+            return jsonify({'error': 'Bad request.'}), 400
     else:
-        return 'Please login first.', 401
+        return ({'error': 'Please login first.'}), 401
 
 
 @app.route('/user/create-profile', methods=['POST'])
