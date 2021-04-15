@@ -68,7 +68,9 @@ def sign_in():
 
 @app.route('/auth/get-username', methods=['GET'])
 def get_username():
-    token = request.headers['Authorization']
+    token = request.headers.get('Authorization')
+    if token is None:
+        return jsonify({"error": "Authorization header is not available."}), 401
 
     data = jwt.decode(
         jwt=token,
