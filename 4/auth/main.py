@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify, make_response
+import requests
 import jwt
 
 from db import run_migrations, close_connection, query_db
 
 app = Flask(__name__)
 jwt_secret_key = 'random secret'
+create_profile_endpoint = 'http://localhost:5002/user/create-profile'
 
 
 @app.before_first_request
@@ -25,7 +27,15 @@ def sign_up():
     phone = request.json.get('phone')
     # TODO: Validate this values
 
-    # TODO: send request to profile
+    response = requests.post(create_profile_endpoint, json={
+        'username': username,
+        'email': email,
+        'phone': phone
+    })
+
+    if response.status_code != 201:
+        return jsonify(response.json()), response.status_code
+
     query_db("""
             insert into auth_user(username, password)
             values (?, ?);
