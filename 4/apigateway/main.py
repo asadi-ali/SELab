@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, make_response
 import requests
+from circuitbreaker import circuit
 
 app = Flask(__name__)
 auth_endpoint = 'http://localhost:5001/auth/get-username'
@@ -10,6 +11,15 @@ endpoints = {
     'api/sign-up': 'http://localhost:5001/auth/sign-up',
     'api/sign-in': 'http://localhost:5001/auth/sign-in'
 }
+
+
+@circuit
+def send_request(endpoint, headers):
+    req = requests.get if request.method == 'GET' else requests.post
+    respon = req(endpoint, headers=headers, json=request.json, timeout=0.5)
+    if respon.status_code >= 500:
+        raise Exception('Internal Server Error')
+    return respon
 
 
 @app.route('/', defaults={'path': ''})
@@ -24,8 +34,12 @@ def gateway_func(path):
         headers[k] = v
     if resp.status_code == 200:
         headers['User'] = resp.json().get('username')
-    req = requests.get if request.method == 'GET' else requests.post
-    response = req(endpoint, headers=headers, json=request.json)
+
+    try:
+        response = send_request(endpoint, headers)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
     if response.status_code not in [200, 201]:
         return jsonify({'error': response.reason}), response.status_code
     res = make_response(jsonify(response.json()))
