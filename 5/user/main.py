@@ -24,7 +24,7 @@ def show_profile():
         else:
             return jsonify({'error': 'Bad request.'}), 400
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 @app.route('/user/edit-profile', methods=['POST'])
@@ -42,7 +42,7 @@ def edit_profile():
         else:
             return jsonify({'error': 'Bad request.'}), 400
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 @app.route('/user/create-profile', methods=['POST'])

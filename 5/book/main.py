@@ -26,9 +26,9 @@ def create():
                 """, [title, category], with_commit=True)
         return jsonify({}), 201
     elif user_type == 'client':
-        return ({'error': 'Only admin can perform this action.'}), 403
+        return jsonify({'error': 'Only admin can perform this action.'}), 403
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 @app.route('/book/update', methods=['PUT'])
@@ -47,9 +47,9 @@ def update():
         else:
             return jsonify({'error': 'Bad request.'}), 400
     elif user_type == 'client':
-        return ({'error': 'Only admin can perform this action.'}), 403
+        return jsonify({'error': 'Only admin can perform this action.'}), 403
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 @app.route('/book/delete', methods=['DELETE'])
@@ -64,9 +64,9 @@ def delete():
         else:
             return jsonify({'error': 'Bad request.'}), 400
     elif user_type == 'client':
-        return ({'error': 'Only admin can perform this action.'}), 403
+        return jsonify({'error': 'Only admin can perform this action.'}), 403
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 @app.route('/book/retrieve', methods=['GET'])
@@ -80,9 +80,9 @@ def retrieve():
         else:
             return jsonify({'error': 'Bad request.'}), 400
     elif user_type == 'client':
-        return ({'error': 'Only admin can perform this action.'}), 403
+        return jsonify({'error': 'Only admin can perform this action.'}), 403
     else:
-        return ({'error': 'Please login first.'}), 401
+        return jsonify({'error': 'Please login first.'}), 401
 
 
 if __name__ == '__main__':

@@ -9,7 +9,11 @@ endpoints = {
     'api/show-profile': 'http://localhost:5002/user/show-profile',
     'api/edit-profile': 'http://localhost:5002/user/edit-profile',
     'api/sign-up': 'http://localhost:5001/auth/sign-up',
-    'api/sign-in': 'http://localhost:5001/auth/sign-in'
+    'api/sign-in': 'http://localhost:5001/auth/sign-in',
+    'api/create-book': 'http://localhost:5003/book/create',
+    'api/retrieve-book': 'http://localhost:5003/book/retrieve',
+    'api/update-book': 'http://localhost:5003/book/update',
+    'api/delete-book': 'http://localhost:5003/book/delete'
 }
 
 
