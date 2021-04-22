@@ -58,5 +58,20 @@ def create_profile():
     return jsonify({}), 201
 
 
+@app.route('/user/all-profiles', methods=['GET'])
+def all_profiles():
+    user_type = request.headers.get('UserType')
+    if user_type == 'admin':
+        info = query_db('select * from profile where type=?', ['client'])
+        if info:
+            return jsonify(info), 200
+        else:
+            return jsonify({'error': 'No record found.'}), 404
+    elif user_type == 'client':
+        return jsonify({'error': 'Only admin can perform this action.'}), 403
+    else:
+        return jsonify({'error': 'Please login first.'}), 401
+
+
 if __name__ == '__main__':
     app.run(port=5002)
