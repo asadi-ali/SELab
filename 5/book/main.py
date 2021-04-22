@@ -85,5 +85,34 @@ def retrieve():
         return jsonify({'error': 'Please login first.'}), 401
 
 
+@app.route('/book/search', methods=['POST'])
+def search():
+    if 'User' not in request.headers:
+        return jsonify({'error': 'Please login first.'}), 401
+
+    filters = []
+    if 'category' in request.json:
+        filters.append(('category', request.json.get('category')))
+    if 'title' in request.json:
+        filters.append(('title', request.json.get('title')))
+
+    query = 'select * from book where '
+    query_args = []
+    if len(filters) == 0:
+        return jsonify({'error': 'You should add at least one filter.'}), 400
+    elif len(filters) == 1:
+        query += '{} = ?'.format(filters[0][0])
+        query_args.append(filters[0][1])
+    else:
+        query += '{} = ? and {} = ?'.format(filters[0][0], filters[1][0])
+        query_args.extend([filters[0][1], filters[1][1]])
+
+    info = query_db(query, query_args)
+    if info:
+        return jsonify(info), 200
+    else:
+        return jsonify({'error': 'There is no book with these filters.'}), 404
+
+
 if __name__ == '__main__':
     app.run(port=5003)

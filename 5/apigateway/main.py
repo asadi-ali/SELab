@@ -13,7 +13,8 @@ endpoints = {
     'api/create-book': 'http://localhost:5003/book/create',
     'api/retrieve-book': 'http://localhost:5003/book/retrieve',
     'api/update-book': 'http://localhost:5003/book/update',
-    'api/delete-book': 'http://localhost:5003/book/delete'
+    'api/delete-book': 'http://localhost:5003/book/delete',
+    'api/search-books': 'http://localhost:5003/book/search'
 }
 
 
