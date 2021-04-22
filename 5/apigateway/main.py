@@ -19,7 +19,14 @@ endpoints = {
 
 @circuit
 def send_request(endpoint, headers):
-    req = requests.get if request.method == 'GET' else requests.post
+    if request.method == 'GET':
+        req = requests.get
+    elif request.method == 'POST':
+        req = requests.post
+    elif request.method == 'PUT':
+        req = requests.put
+    else:
+        req = requests.delete
     respon = req(endpoint, headers=headers, json=request.json, timeout=0.5)
     if respon.status_code >= 500:
         raise Exception('Internal Server Error')
@@ -27,7 +34,7 @@ def send_request(endpoint, headers):
 
 
 @app.route('/', defaults={'path': ''})
-@app.route('/<path:path>', methods=['GET', 'POST'])
+@app.route('/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def gateway_func(path):
     endpoint = endpoints.get(path)
     if endpoint is None:
