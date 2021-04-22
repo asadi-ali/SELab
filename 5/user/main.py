@@ -20,7 +20,7 @@ def show_profile():
     if username:
         info = query_db('select * from profile where username=?', [username])
         if info:
-            return jsonify(info), 200
+            return jsonify(info[0]), 200
         else:
             return jsonify({'error': 'Bad request.'}), 400
     else:
@@ -35,8 +35,8 @@ def edit_profile():
         if info:
             email = request.json.get('email')
             phone = request.json.get('phone')
-            email = info.get('email') if email is None else email
-            phone = info.get('phone') if phone is None else phone
+            email = info[0].get('email') if email is None else email
+            phone = info[0].get('phone') if phone is None else phone
             query_db('update profile set email=?, phone=? where username=?', [email, phone, username], with_commit=True)
             return jsonify({}), 200
         else:
@@ -50,10 +50,11 @@ def create_profile():
     username = request.json.get('username')
     email = request.json.get('email')
     phone = request.json.get('phone')
+    user_type = request.json.get('type')
     query_db("""
             insert into profile(username, email, phone, type)
             values (?, ?, ?, ?)
-        """, [username, email, phone, 'client'], with_commit=True)
+        """, [username, email, phone, user_type], with_commit=True)
     return jsonify({}), 201
 
 

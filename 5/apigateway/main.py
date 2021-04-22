@@ -3,7 +3,7 @@ import requests
 from circuitbreaker import circuit
 
 app = Flask(__name__)
-auth_endpoint = 'http://localhost:5001/auth/get-username'
+auth_endpoint = 'http://localhost:5001/auth/get-user'
 
 endpoints = {
     'api/show-profile': 'http://localhost:5002/user/show-profile',
@@ -34,6 +34,7 @@ def gateway_func(path):
         headers[k] = v
     if resp.status_code == 200:
         headers['User'] = resp.json().get('username')
+        headers['UserType'] = resp.json().get('type')
 
     try:
         response = send_request(endpoint, headers)

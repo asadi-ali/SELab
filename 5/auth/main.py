@@ -31,7 +31,8 @@ def sign_up():
     response = requests.post(create_profile_endpoint, json={
         'username': username,
         'email': email,
-        'phone': phone
+        'phone': phone,
+        'type': 'client'
     })
 
     if response.status_code != 201:
@@ -58,13 +59,12 @@ def sign_in():
 
     response = requests.get(show_profile_endpoint, headers={
         'User': username
-
     })
     if response.status_code != 200:
         return jsonify(response.json()), response.status_code
 
     token = jwt.encode(
-        payload={"username": username, "type": response.json()},
+        payload={"username": username, "type": response.json()['type']},
         key=jwt_secret_key,
         algorithm="HS256"
     )
@@ -74,8 +74,8 @@ def sign_in():
     return response
 
 
-@app.route('/auth/get-username', methods=['GET'])
-def get_username():
+@app.route('/auth/get-user', methods=['GET'])
+def get_user():
     token = request.headers.get('Authorization')
     if token is None:
         return jsonify({"error": "Authorization header is not available."}), 401
@@ -86,10 +86,10 @@ def get_username():
         algorithms=["HS256"]
     )
 
-    if 'username' not in data:
+    if 'username' not in data or 'type' not in data:
         return jsonify({"error": "Authorization header is not valid."}), 401
 
-    return jsonify({'username': data['username']}), 200
+    return jsonify({'username': data['username'], 'type': data['type']}), 200
 
 
 if __name__ == '__main__':
